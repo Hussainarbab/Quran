@@ -183,7 +183,7 @@ export default function App() {
 
   function renderHome() {
     return (
-      <ScrollView contentContainerStyle={styles.page}>
+      <ScrollView style={styles.screenScroll} contentContainerStyle={styles.page}>
         <View style={[styles.hero, { backgroundColor: palette.primary }]}>
           <Text style={styles.eyebrowLight}>SHIA ISLAMIC LIBRARY</Text>
           <Text style={styles.heroTitle}>Noor-e-Hidayat</Text>
@@ -269,7 +269,7 @@ export default function App() {
 
   function renderQuran() {
     return (
-      <ScrollView contentContainerStyle={styles.page}>
+      <ScrollView style={styles.screenScroll} contentContainerStyle={styles.page}>
         <View style={[styles.card, { backgroundColor: palette.surface, borderColor: palette.border }]}>
           <Text style={[styles.heading, { color: palette.text }]}>Holy Quran</Text>
           <Text style={[styles.body, { color: palette.muted }]}>
@@ -305,7 +305,7 @@ export default function App() {
 
   function renderLibrary() {
     return (
-      <ScrollView contentContainerStyle={styles.page}>
+      <ScrollView style={styles.screenScroll} contentContainerStyle={styles.page}>
         <View style={[styles.card, { backgroundColor: palette.surface, borderColor: palette.border }]}>
           <Text style={[styles.heading, { color: palette.text }]}>Duas, ziyarat & Sahifa</Text>
           <Text style={[styles.body, { color: palette.muted }]}>
@@ -344,7 +344,7 @@ export default function App() {
 
   function renderGuides() {
     return (
-      <ScrollView contentContainerStyle={styles.page}>
+      <ScrollView style={styles.screenScroll} contentContainerStyle={styles.page}>
         <View style={[styles.card, { backgroundColor: palette.surface, borderColor: palette.border }]}>
           <Text style={[styles.heading, { color: palette.text }]}>Prayer & practical guides</Text>
           <Text style={[styles.body, { color: palette.muted }]}>
@@ -366,7 +366,7 @@ export default function App() {
 
   function renderCalendar() {
     return (
-      <ScrollView contentContainerStyle={styles.page}>
+      <ScrollView style={styles.screenScroll} contentContainerStyle={styles.page}>
         <View style={[styles.card, { backgroundColor: palette.surface, borderColor: palette.border }]}>
           <Text style={[styles.heading, { color: palette.text }]}>Islamic calendar & Amaal</Text>
           <Text style={[styles.body, { color: palette.muted }]}>
@@ -389,7 +389,7 @@ export default function App() {
   function renderBookmarks() {
     const savedItems = data.bookmarks;
     return (
-      <ScrollView contentContainerStyle={styles.page}>
+      <ScrollView style={styles.screenScroll} contentContainerStyle={styles.page}>
         <View style={[styles.card, { backgroundColor: palette.surface, borderColor: palette.border }]}>
           <Text style={[styles.heading, { color: palette.text }]}>Saved items</Text>
           <Text style={[styles.body, { color: palette.muted }]}>Bookmarks are stored on this device; account sync is not configured.</Text>
@@ -407,7 +407,7 @@ export default function App() {
   function renderTasbeeh() {
     const goalMet = validTarget && data.count >= countTarget;
     return (
-      <ScrollView contentContainerStyle={styles.page}>
+      <ScrollView style={styles.screenScroll} contentContainerStyle={styles.page}>
         <View style={[styles.card, { backgroundColor: palette.surface, borderColor: palette.border }]}>
           <Text style={[styles.heading, { color: palette.text }]}>Tasbeeh counter</Text>
           <Text style={[styles.caption, { textAlign: 'center', color: palette.muted }]}>Your personal counter · saved on this device</Text>
@@ -504,7 +504,7 @@ export default function App() {
 
   function renderSettings() {
     return (
-      <ScrollView contentContainerStyle={styles.page}>
+      <ScrollView style={styles.screenScroll} contentContainerStyle={styles.page}>
         <View style={[styles.card, { backgroundColor: palette.surface, borderColor: palette.border }]}>
           <Text style={[styles.heading, { color: palette.text }]}>Settings</Text>
           <SettingRow label="Dark appearance" description="Change the colors used on this device." value={data.darkMode} onValueChange={(darkMode) => setData((previous) => ({ ...previous, darkMode }))} textColor={palette.text} mutedColor={palette.muted} />
@@ -525,7 +525,7 @@ export default function App() {
 
   function renderSearch() {
     return (
-      <ScrollView contentContainerStyle={styles.page}>
+      <ScrollView style={styles.screenScroll} contentContainerStyle={styles.page}>
         <View style={[styles.card, { backgroundColor: palette.surface, borderColor: palette.border }]}>
           <Text style={[styles.heading, { color: palette.text }]}>Search the library</Text>
           {renderSearchBox('Search Quran metadata and library titles')}
@@ -687,6 +687,7 @@ const styles = StyleSheet.create({
   topMeta: { fontSize: 13, fontWeight: '600' },
   storageNotice: { paddingHorizontal: 18, paddingVertical: 8 },
   loading: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  screenScroll: { flex: 1 },
   page: { width: '100%', maxWidth: 960, alignSelf: 'center', padding: 18, paddingBottom: 34, gap: 16 },
   hero: { borderRadius: 22, padding: 24, gap: 10 },
   eyebrowLight: { color: '#d4eadd', fontSize: 11, fontWeight: '800', letterSpacing: 1.5 },
