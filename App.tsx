@@ -271,7 +271,7 @@ export default function App() {
                 accessibilityRole="link"
                 accessibilityLabel={`Continue reading ${getContentTitle(id)}`}
                 onPress={() => router.push(getContentRoute(id))}
-                style={[styles.recentItem, { backgroundColor: palette.surfaceAlt, borderColor: palette.border }]}
+                style={[styles.listItem, { backgroundColor: palette.surfaceAlt, borderColor: palette.border }]}
               >
                 <View style={styles.flex}>
                   <Text style={[styles.itemTitle, { color: palette.text }]}>{getContentTitle(id)}</Text>
@@ -749,7 +749,6 @@ const styles = StyleSheet.create({
   textButton: { borderWidth: 1, borderRadius: 10, paddingHorizontal: 12, paddingVertical: 8 },
   input: { borderWidth: 1, borderRadius: 12, paddingHorizontal: 13, paddingVertical: 12, fontSize: 15 },
   listItem: { borderWidth: 1, borderRadius: 14, padding: 13, flexDirection: 'row', alignItems: 'center', gap: 12 },
-  recentItem: { borderWidth: 1, borderRadius: 14, padding: 13, flexDirection: 'row', alignItems: 'center', gap: 12 },
   recentArrow: { fontSize: 24, fontWeight: '600' },
   number: { width: 32, fontSize: 18, fontWeight: '800' },
   arabicTitle: { fontSize: 24, textAlign: 'right' },
