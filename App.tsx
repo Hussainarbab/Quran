@@ -182,14 +182,33 @@ export default function App() {
   }
 
   function renderHome() {
+    const heroTextColor = data.darkMode ? '#071912' : '#ffffff';
+    const heroMutedColor = data.darkMode ? '#183a2d' : '#e3f0e8';
+
     return (
       <ScrollView style={styles.screenScroll} contentContainerStyle={styles.page}>
         <View style={[styles.hero, { backgroundColor: palette.primary }]}>
-          <Text style={styles.eyebrowLight}>SHIA ISLAMIC LIBRARY</Text>
-          <Text style={styles.heroTitle}>Noor-e-Hidayat</Text>
-          <Text style={styles.heroBody}>A calm, source-conscious home for learning and daily worship.</Text>
-          <View style={styles.heroPill}>
-            <Text style={styles.heroPillText}>Content status: foundation in progress</Text>
+          <Text style={[styles.eyebrowLight, { color: heroMutedColor }]}>SHIA ISLAMIC LIBRARY</Text>
+          <Text style={[styles.heroTitle, { color: heroTextColor }]}>Noor-e-Hidayat</Text>
+          <Text style={[styles.heroBody, { color: heroMutedColor }]}>A calm, source-conscious home for learning and daily worship.</Text>
+          <View style={[styles.heroPill, { backgroundColor: data.darkMode ? '#07191222' : '#ffffff22' }]}>
+            <Text style={[styles.heroPillText, { color: heroTextColor }]}>Content status: foundation in progress</Text>
+          </View>
+          <View style={styles.heroActions}>
+            <Pressable
+              accessibilityRole="button"
+              onPress={() => router.push('/quran')}
+              style={[styles.heroAction, { backgroundColor: heroTextColor, borderColor: heroTextColor }]}
+            >
+              <Text style={[styles.heroActionText, { color: palette.primary }]}>Browse Quran</Text>
+            </Pressable>
+            <Pressable
+              accessibilityRole="button"
+              onPress={() => router.push('/tasbeeh')}
+              style={[styles.heroAction, { borderColor: heroTextColor }]}
+            >
+              <Text style={[styles.heroActionText, { color: heroTextColor }]}>Open Tasbeeh</Text>
+            </Pressable>
           </View>
         </View>
 
@@ -247,7 +266,19 @@ export default function App() {
           <Text style={[styles.heading, { color: palette.text }]}>Continue where you left off</Text>
           {data.recentlyRead.length ? (
             data.recentlyRead.slice(0, 3).map((id) => (
-              <Text key={id} style={[styles.body, { color: palette.muted }]}>{getContentTitle(id)}</Text>
+              <Pressable
+                key={id}
+                accessibilityRole="link"
+                accessibilityLabel={`Continue reading ${getContentTitle(id)}`}
+                onPress={() => router.push(getContentRoute(id))}
+                style={[styles.recentItem, { backgroundColor: palette.surfaceAlt, borderColor: palette.border }]}
+              >
+                <View style={styles.flex}>
+                  <Text style={[styles.itemTitle, { color: palette.text }]}>{getContentTitle(id)}</Text>
+                  <Text style={[styles.caption, { color: palette.muted }]}>Continue reading</Text>
+                </View>
+                <Text style={[styles.recentArrow, { color: palette.primary }]} accessibilityElementsHidden>›</Text>
+              </Pressable>
             ))
           ) : (
             <Text style={[styles.body, { color: palette.muted }]}>Recently opened items will appear here on this device.</Text>
@@ -671,6 +702,10 @@ function getContentTitle(id: string) {
   return id;
 }
 
+function getContentRoute(id: string): '/quran' | '/library' {
+  return id.startsWith('quran:') ? '/quran' : '/library';
+}
+
 const styles = StyleSheet.create({
   safeArea: { flex: 1 },
   topBar: {
@@ -695,6 +730,9 @@ const styles = StyleSheet.create({
   heroBody: { color: '#e3f0e8', fontSize: 15, lineHeight: 23, maxWidth: 560 },
   heroPill: { alignSelf: 'flex-start', marginTop: 6, borderRadius: 999, backgroundColor: '#ffffff22', paddingHorizontal: 12, paddingVertical: 7 },
   heroPillText: { color: '#ffffff', fontSize: 12, fontWeight: '700' },
+  heroActions: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginTop: 4 },
+  heroAction: { minHeight: 44, borderWidth: 1, borderRadius: 12, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 14 },
+  heroActionText: { fontSize: 13, fontWeight: '800' },
   notice: { borderWidth: 1, borderRadius: 16, padding: 16, gap: 6 },
   noticeTitle: { fontSize: 16, fontWeight: '800' },
   card: { borderWidth: 1, borderRadius: 18, padding: 16, gap: 12 },
@@ -711,6 +749,8 @@ const styles = StyleSheet.create({
   textButton: { borderWidth: 1, borderRadius: 10, paddingHorizontal: 12, paddingVertical: 8 },
   input: { borderWidth: 1, borderRadius: 12, paddingHorizontal: 13, paddingVertical: 12, fontSize: 15 },
   listItem: { borderWidth: 1, borderRadius: 14, padding: 13, flexDirection: 'row', alignItems: 'center', gap: 12 },
+  recentItem: { borderWidth: 1, borderRadius: 14, padding: 13, flexDirection: 'row', alignItems: 'center', gap: 12 },
+  recentArrow: { fontSize: 24, fontWeight: '600' },
   number: { width: 32, fontSize: 18, fontWeight: '800' },
   arabicTitle: { fontSize: 24, textAlign: 'right' },
   itemTitle: { fontSize: 15, fontWeight: '700' },
